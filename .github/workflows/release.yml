@@ -105,4 +105,6 @@ jobs:
 
       - name: Create 'stack_release' dist-tag
         if: ${{ github.event.inputs.dry-run == 'false' && github.event.inputs.is-stack-release == 'true' }}
-        run: npm dist-tag add "${NPM_PACKAGE}@${VERSION}" stack_release
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+          npm dist-tag add "${NPM_PACKAGE}@${VERSION}" stack_release
